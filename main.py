@@ -39,6 +39,8 @@ class MainMenuWindow(QMainWindow):
         if self.sender().text() == 'Добавить':
             word_russian = self.lineEdit_ru.text()
             if word_russian and word_chechen:
+                cur.execute("""UPDATE SQLITE_SEQUENCE SET seq = 0
+                               WHERE name = 'Words'""")
                 cur.execute(f"""INSERT INTO Words(word_chechen, word_russian)
                                 VALUES('{word_chechen.lower()}', '{word_russian.lower()}')""")
                 self.lineEdit_ru.setText('')
